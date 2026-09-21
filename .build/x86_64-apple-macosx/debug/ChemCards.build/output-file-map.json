@@ -1,0 +1,275 @@
+{
+  "": {
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/master.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/AI/AIDifficulty.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/AI/AIDifficulty.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/AI/AIDifficulty.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/AI/AIDifficulty~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/AI/AIDifficulty.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/AI/AIPlanner.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/AI/AIPlanner.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/AI/AIPlanner.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/AI/AIPlanner~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/AI/AIPlanner.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/AI/AIView.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/AI/AIView.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/AI/AIView.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/AI/AIView~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/AI/AIView.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/AI/ReactionPotential.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/AI/ReactionPotential.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/AI/ReactionPotential.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/AI/ReactionPotential~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/AI/ReactionPotential.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/Animation/CharacterSpec.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Animation/CharacterSpec.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Animation/CharacterSpec.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Animation/CharacterSpec~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Animation/CharacterSpec.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/Animation/PortraitRig.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Animation/PortraitRig.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Animation/PortraitRig.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Animation/PortraitRig~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Animation/PortraitRig.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/App/AppDelegate.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/App/AppDelegate.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/App/AppDelegate.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/App/AppDelegate~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/App/AppDelegate.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/App/CLI.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/App/CLI.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/App/CLI.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/App/CLI~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/App/CLI.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/App/GameMain.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/App/GameMain.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/App/GameMain.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/App/GameMain~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/App/GameMain.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/App/MainMenu.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/App/MainMenu.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/App/MainMenu.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/App/MainMenu~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/App/MainMenu.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/App/RenderHarness.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/App/RenderHarness.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/App/RenderHarness.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/App/RenderHarness~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/App/RenderHarness.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/App/Smoke.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/App/Smoke.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/App/Smoke.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/App/Smoke~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/App/Smoke.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/Chemistry/Balancer.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Chemistry/Balancer.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Chemistry/Balancer.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Chemistry/Balancer~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Chemistry/Balancer.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/Chemistry/CardCategory.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Chemistry/CardCategory.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Chemistry/CardCategory.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Chemistry/CardCategory~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Chemistry/CardCategory.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/Chemistry/ChemistryData.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Chemistry/ChemistryData.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Chemistry/ChemistryData.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Chemistry/ChemistryData~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Chemistry/ChemistryData.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/Chemistry/ChemistryRegistry.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Chemistry/ChemistryRegistry.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Chemistry/ChemistryRegistry.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Chemistry/ChemistryRegistry~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Chemistry/ChemistryRegistry.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/Chemistry/CuratedReactions.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Chemistry/CuratedReactions.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Chemistry/CuratedReactions.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Chemistry/CuratedReactions~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Chemistry/CuratedReactions.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/Chemistry/FormulaKit.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Chemistry/FormulaKit.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Chemistry/FormulaKit.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Chemistry/FormulaKit~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Chemistry/FormulaKit.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/Chemistry/Reaction.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Chemistry/Reaction.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Chemistry/Reaction.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Chemistry/Reaction~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Chemistry/Reaction.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/Chemistry/ReactionEngine.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Chemistry/ReactionEngine.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Chemistry/ReactionEngine.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Chemistry/ReactionEngine~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Chemistry/ReactionEngine.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/Chemistry/ReactionRules.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Chemistry/ReactionRules.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Chemistry/ReactionRules.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Chemistry/ReactionRules~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Chemistry/ReactionRules.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/Chemistry/ReactionTable.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Chemistry/ReactionTable.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Chemistry/ReactionTable.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Chemistry/ReactionTable~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Chemistry/ReactionTable.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/Chemistry/Species.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Chemistry/Species.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Chemistry/Species.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Chemistry/Species~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Chemistry/Species.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/Model/ActionCard.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Model/ActionCard.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Model/ActionCard.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Model/ActionCard~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Model/ActionCard.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/Model/Card.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Model/Card.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Model/Card.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Model/Card~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Model/Card.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/Model/Deck.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Model/Deck.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Model/Deck.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Model/Deck~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Model/Deck.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/Model/GameLogEntry.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Model/GameLogEntry.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Model/GameLogEntry.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Model/GameLogEntry~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Model/GameLogEntry.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/Model/GamePhase.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Model/GamePhase.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Model/GamePhase.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Model/GamePhase~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Model/GamePhase.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/Model/GameState.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Model/GameState.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Model/GameState.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Model/GameState~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Model/GameState.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/Model/MatchRules.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Model/MatchRules.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Model/MatchRules.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Model/MatchRules~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Model/MatchRules.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/Model/Player.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Model/Player.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Model/Player.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Model/Player~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Model/Player.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/Services/AssetLoader.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Services/AssetLoader.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Services/AssetLoader.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Services/AssetLoader~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Services/AssetLoader.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/Services/PhraseBook.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Services/PhraseBook.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Services/PhraseBook.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Services/PhraseBook~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Services/PhraseBook.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/Services/StageDirector.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Services/StageDirector.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Services/StageDirector.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Services/StageDirector~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Services/StageDirector.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/Services/Theme.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Services/Theme.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Services/Theme.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Services/Theme~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Services/Theme.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/Support/SplitMix64.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Support/SplitMix64.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Support/SplitMix64.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Support/SplitMix64~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Support/SplitMix64.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/Views/CardView.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Views/CardView.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Views/CardView.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Views/CardView~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Views/CardView.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/Views/GameRootView.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Views/GameRootView.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Views/GameRootView.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Views/GameRootView~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Views/GameRootView.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/Views/HandView.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Views/HandView.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Views/HandView.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Views/HandView~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Views/HandView.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/Views/LogDrawerView.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Views/LogDrawerView.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Views/LogDrawerView.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Views/LogDrawerView~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Views/LogDrawerView.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/Views/ReactionBannerView.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Views/ReactionBannerView.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Views/ReactionBannerView.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Views/ReactionBannerView~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Views/ReactionBannerView.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/Views/ResultView.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Views/ResultView.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Views/ResultView.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Views/ResultView~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Views/ResultView.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/Views/SeatView.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Views/SeatView.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Views/SeatView.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Views/SeatView~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Views/SeatView.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/Views/TableView.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Views/TableView.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Views/TableView.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Views/TableView~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Views/TableView.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/Views/VesselPileView.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Views/VesselPileView.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Views/VesselPileView.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Views/VesselPileView~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCards.build/Views/VesselPileView.swiftdeps"
+  }
+}

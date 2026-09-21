@@ -1,0 +1,12 @@
+version: "Apple Swift version 5.7.1 (swiftlang-5.7.1.135.3 clang-1400.0.29.51)"
+options: "557071b90974bfc02608a6656208d4011b1809750a325092de51b164fc454374"
+build_start_time: [1789916952, 649590015]
+build_end_time: [1789916965, 885910034]
+inputs:
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/App/AppDelegate.swift": [1789916770, 394586086]
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/App/GameMain.swift": [1789916487, 758599996]
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/App/MainMenu.swift": [1789916637, 493608474]
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/App/Smoke.swift": [1789916759, 508744239]
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/Chemistry/FormulaKit.swift": !private [1789916943, 410982131]
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/Services/Theme.swift": [1789916613, 819504737]
+  "/Users/xupengzhu/Desktop/ChemCards/Sources/ChemCards/Views/GameRootView.swift": [1789916510, 80978155]

@@ -1,0 +1,6 @@
+version: "Apple Swift version 5.7.1 (swiftlang-5.7.1.135.3 clang-1400.0.29.51)"
+options: "3c7b44b2b642d9384505e8031fa2d78d5a34d33225984cb69a073eb8f2a59446"
+build_start_time: [1789916989, 718554973]
+build_end_time: [1789916998, 563452005]
+inputs:
+  "/Users/xupengzhu/Desktop/ChemCards/Tests/ChemCardsTests/FormulaKitTests.swift": [1789916943, 463883399]

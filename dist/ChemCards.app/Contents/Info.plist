@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleName</key>              <string>ChemCards</string>
+    <key>CFBundleDisplayName</key>       <string>化学扑克牌</string>
+    <key>CFBundleExecutable</key>        <string>ChemCards</string>
+    <key>CFBundleIdentifier</key>        <string>cn.chemcards.app</string>
+    <key>CFBundlePackageType</key>       <string>APPL</string>
+    <key>CFBundleShortVersionString</key><string>1.0.0</string>
+    <key>CFBundleVersion</key>           <string>1</string>
+    <key>CFBundleIconFile</key>          <string>AppIcon</string>
+    <key>LSMinimumSystemVersion</key>    <string>13.0</string>
+    <key>NSHighResolutionCapable</key>   <true/>
+    <key>NSPrincipalClass</key>          <string>NSApplication</string>
+    <key>NSSupportsAutomaticGraphicsSwitching</key><true/>
+    <key>LSApplicationCategoryType</key> <string>public.app-category.puzzle-games</string>
+    <key>NSHumanReadableCopyright</key>  <string>化学扑克牌 v1.0.0 · 同人原创学习游戏</string>
+    <key>CFBundleDevelopmentRegion</key> <string>zh_CN</string>
+    <key>CFBundleLocalizations</key>     <array><string>zh_CN</string><string>en</string></array>
+</dict>
+</plist>

@@ -1,0 +1,53 @@
+{
+  "": {
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCardsTests.build/master.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Tests/ChemCardsTests/AITests.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCardsTests.build/AITests.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCardsTests.build/AITests.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCardsTests.build/AITests~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCardsTests.build/AITests.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Tests/ChemCardsTests/BalanceTests.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCardsTests.build/BalanceTests.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCardsTests.build/BalanceTests.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCardsTests.build/BalanceTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCardsTests.build/BalanceTests.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Tests/ChemCardsTests/ChemistryRegistryTests.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCardsTests.build/ChemistryRegistryTests.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCardsTests.build/ChemistryRegistryTests.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCardsTests.build/ChemistryRegistryTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCardsTests.build/ChemistryRegistryTests.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Tests/ChemCardsTests/FormulaKitTests.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCardsTests.build/FormulaKitTests.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCardsTests.build/FormulaKitTests.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCardsTests.build/FormulaKitTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCardsTests.build/FormulaKitTests.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Tests/ChemCardsTests/LegalityTests.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCardsTests.build/LegalityTests.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCardsTests.build/LegalityTests.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCardsTests.build/LegalityTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCardsTests.build/LegalityTests.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Tests/ChemCardsTests/ReactionEngineTests.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCardsTests.build/ReactionEngineTests.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCardsTests.build/ReactionEngineTests.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCardsTests.build/ReactionEngineTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCardsTests.build/ReactionEngineTests.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Tests/ChemCardsTests/StateMachineTests.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCardsTests.build/StateMachineTests.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCardsTests.build/StateMachineTests.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCardsTests.build/StateMachineTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCardsTests.build/StateMachineTests.swiftdeps"
+  },
+  "/Users/xupengzhu/Desktop/ChemCards/Tests/ChemCardsTests/TestBench.swift": {
+    "dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCardsTests.build/TestBench.d",
+    "object": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCardsTests.build/TestBench.swift.o",
+    "swiftmodule": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCardsTests.build/TestBench~partial.swiftmodule",
+    "swift-dependencies": "/Users/xupengzhu/Desktop/ChemCards/.build/x86_64-apple-macosx/debug/ChemCardsTests.build/TestBench.swiftdeps"
+  }
+}

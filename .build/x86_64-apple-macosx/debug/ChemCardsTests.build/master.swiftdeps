@@ -1,0 +1,13 @@
+version: "Apple Swift version 5.7.1 (swiftlang-5.7.1.135.3 clang-1400.0.29.51)"
+options: "3c7b44b2b642d9384505e8031fa2d78d5a34d33225984cb69a073eb8f2a59446"
+build_start_time: [1789931993, 291844844]
+build_end_time: [1789931993, 362094879]
+inputs:
+  "/Users/xupengzhu/Desktop/ChemCards/Tests/ChemCardsTests/AITests.swift": [1789928994, 862700462]
+  "/Users/xupengzhu/Desktop/ChemCards/Tests/ChemCardsTests/BalanceTests.swift": [1789929917, 482113838]
+  "/Users/xupengzhu/Desktop/ChemCards/Tests/ChemCardsTests/ChemistryRegistryTests.swift": [1789918049, 517435789]
+  "/Users/xupengzhu/Desktop/ChemCards/Tests/ChemCardsTests/FormulaKitTests.swift": [1789916943, 463883399]
+  "/Users/xupengzhu/Desktop/ChemCards/Tests/ChemCardsTests/LegalityTests.swift": [1789930940, 920636653]
+  "/Users/xupengzhu/Desktop/ChemCards/Tests/ChemCardsTests/ReactionEngineTests.swift": [1789919876, 440207958]
+  "/Users/xupengzhu/Desktop/ChemCards/Tests/ChemCardsTests/StateMachineTests.swift": [1789930864, 30605792]
+  "/Users/xupengzhu/Desktop/ChemCards/Tests/ChemCardsTests/TestBench.swift": [1789930923, 331743240]

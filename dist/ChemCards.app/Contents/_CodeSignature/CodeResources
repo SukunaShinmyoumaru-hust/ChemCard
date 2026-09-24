@@ -8,6 +8,14 @@
 		<data>
 		pEY2QS6gPI8YcJ92nSoocyt4Q1o=
 		</data>
+		<key>Resources/Characters/cirno/base.png</key>
+		<data>
+		wm4Jle1tJYym1uyd4ucs1xqGUFQ=
+		</data>
+		<key>Resources/Characters/eirin/base.png</key>
+		<data>
+		UreGsHpCI1V5+fLwNqY+LT0+iAk=
+		</data>
 		<key>Resources/Characters/marisa/base.png</key>
 		<data>
 		3zoPf8vzyHH828fTbKT0MC/IvJQ=
@@ -16,9 +24,17 @@
 		<data>
 		vtdsUiV6H8trs6+LNlcrAdvWSPo=
 		</data>
+		<key>Resources/Characters/sakuya/base.png</key>
+		<data>
+		YhuDn5y8Pu7SsVSzZ5PtpckRpLk=
+		</data>
 		<key>Resources/Characters/sanae/base.png</key>
 		<data>
 		BhTje0ZCb8QDZXup+Rxy/CtQbk8=
+		</data>
+		<key>Resources/Characters/seiga/base.png</key>
+		<data>
+		ZF3DpK+m/Dg7oRBE5tRoVE1uocA=
 		</data>
 		<key>Resources/Characters/youmu/base.png</key>
 		<data>
@@ -42,6 +58,20 @@
 			jJHVyVcFd5kVDX5bwxG0N7bDPM/ySWiy5VitjGHz2Ew=
 			</data>
 		</dict>
+		<key>Resources/Characters/cirno/base.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			LRmWS+IQkQR3/re31jyiyudaS1Ryap76PrCCRQGCanI=
+			</data>
+		</dict>
+		<key>Resources/Characters/eirin/base.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			cZwI4blJuMsjYgpyTKCLOt+Bo6VQqT9oYWDEJsvtzto=
+			</data>
+		</dict>
 		<key>Resources/Characters/marisa/base.png</key>
 		<dict>
 			<key>hash2</key>
@@ -56,11 +86,25 @@
 			GaGt5LYFfeRT2T5IPI9IBgbEq24e1SYuLa+9UD2TrUQ=
 			</data>
 		</dict>
+		<key>Resources/Characters/sakuya/base.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			YDev2h/QrEC9k98Y+dDmuQVn8BzDs3sp6RbVGWF9ZUI=
+			</data>
+		</dict>
 		<key>Resources/Characters/sanae/base.png</key>
 		<dict>
 			<key>hash2</key>
 			<data>
 			N53ZWlpYDcA8igXO/+5KFRBJMc7RXWFho1ade6va6js=
+			</data>
+		</dict>
+		<key>Resources/Characters/seiga/base.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			eCs+oLazxVBYR67rpurrcYJO51cdcpIt37xWParxxSw=
 			</data>
 		</dict>
 		<key>Resources/Characters/youmu/base.png</key>

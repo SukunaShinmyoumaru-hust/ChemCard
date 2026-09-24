@@ -4,6 +4,7 @@ import SwiftUI
 struct ResultView: View {
     @ObservedObject var state: GameState
     var reduceMotion = false
+    var width: CGFloat = 560
     var onRestart: () -> Void
     var onExit: () -> Void
 
@@ -57,7 +58,7 @@ struct ResultView: View {
             .controlSize(.large)
         }
         .padding(26)
-        .frame(width: 560)
+        .frame(width: width)
         .background(RoundedRectangle(cornerRadius: 22, style: .continuous)
             .fill(SwiftUI.Color(white: 0.09).opacity(0.97)))
         .overlay(RoundedRectangle(cornerRadius: 22, style: .continuous)
@@ -113,7 +114,8 @@ struct StandingRow: View {
                 Text(standing.name)
                     .font(.system(size: 14, weight: .semibold, design: .rounded))
                     .foregroundStyle(Theme.Color.textPrimary)
-                Text(player.isHuman ? "你" : (player.difficulty?.displayName ?? "电脑"))
+                Text(player.isHuman ? player.character.displayName
+                        : (player.difficulty?.displayName ?? "电脑"))
                     .font(.system(size: 11.5, design: .rounded))
                     .foregroundStyle(Theme.Color.textSecondary)
             }

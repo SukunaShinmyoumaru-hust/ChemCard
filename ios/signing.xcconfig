@@ -1,0 +1,8 @@
+// 签名相关只放这一个文件，工程本体里的 DEVELOPMENT_TEAM 故意留空。
+// 生成器每次都会重写 project.pbxproj，只有这个文件是"存在就不动"，
+// 所以在 Xcode 图形界面里选好的 Team 不会被下一次重新生成抹掉。
+//
+// 装真机前：Xcode → Settings → Accounts 登录 Apple ID，
+// 然后在这里填上你的 Team ID（Xcode 里账号详情页能看到，10 位字母数字），
+// 或者直接在 Xcode 的 Signing & Capabilities 里选——下次重新生成工程时会抄回这里。
+DEVELOPMENT_TEAM = WCGNGSV76B

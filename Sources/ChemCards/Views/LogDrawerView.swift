@@ -3,6 +3,7 @@ import SwiftUI
 /// 侧边抽屉：上半是「实录」（每一步发生了什么），下半是「手册」（本局出现过的反应，可复习）
 struct LogDrawerView: View {
     @ObservedObject var state: GameState
+    var panelWidth: CGFloat = 380
     var onClose: () -> Void
 
     @State private var tab: Tab = .log
@@ -41,7 +42,7 @@ struct LogDrawerView: View {
             case .book: handbook
             }
         }
-        .frame(width: 380)
+        .frame(width: panelWidth)
         .frame(maxHeight: .infinity)
         .background(.ultraThinMaterial)
         .background(SwiftUI.Color(white: 0.07).opacity(0.86))

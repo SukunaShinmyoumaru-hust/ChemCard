@@ -4,8 +4,16 @@ import SwiftUI
 struct VesselPileView: View {
     @ObservedObject var state: GameState
     var cardWidth: CGFloat
+    /// 手机上牌宽只有 34，按牌宽推出来的 5.8pt 字读不了；桌面不传，仍按牌宽比例走
+    var labelSize: CGFloat?
+    /// 手机上没有整行余量给「接得住任意一种就能出牌」这句长说明
+    var compactCaption = false
     var drawEnabled: Bool
     var onDraw: () -> Void
+
+    private var icon: CGFloat { labelSize ?? cardWidth * 0.19 }
+    private var text: CGFloat { labelSize ?? cardWidth * 0.17 }
+    private var smallText: CGFloat { labelSize ?? cardWidth * 0.16 }
 
     var body: some View {
         VStack(spacing: cardWidth * 0.18) {
@@ -24,10 +32,10 @@ struct VesselPileView: View {
             VStack(spacing: 6) {
                 HStack(spacing: 5) {
                     Image(systemName: "square.stack.3d.up")
-                        .font(.system(size: cardWidth * 0.19, weight: .semibold))
+                        .font(.system(size: icon, weight: .semibold))
                         .foregroundStyle(Theme.Color.accent)
                     Text("牌堆 · \(state.stock.count) 张")
-                        .font(.system(size: cardWidth * 0.17, weight: .semibold, design: .rounded))
+                        .font(.system(size: text, weight: .semibold, design: .rounded))
                         .foregroundStyle(Theme.Color.textSecondary)
                 }
 
@@ -70,12 +78,14 @@ struct VesselPileView: View {
         return VStack(spacing: 6) {
             HStack(spacing: 5) {
                 Image(systemName: "testtube.2")
-                    .font(.system(size: cardWidth * 0.19, weight: .semibold))
+                    .font(.system(size: icon, weight: .semibold))
                     .foregroundStyle(Theme.Color.accent)
                 Text(present.isEmpty
                         ? "反应容器 · 空的"
-                        : "反应容器 · 现存 \(present.count) 种，接得住任意一种就能出牌")
-                    .font(.system(size: cardWidth * 0.17, weight: .semibold, design: .rounded))
+                        : compactCaption
+                            ? "容器 · \(present.count) 种"
+                            : "反应容器 · 现存 \(present.count) 种，接得住任意一种就能出牌")
+                    .font(.system(size: text, weight: .semibold, design: .rounded))
                     .foregroundStyle(Theme.Color.textSecondary)
             }
 
@@ -89,7 +99,7 @@ struct VesselPileView: View {
 
                 if present.isEmpty {
                     Text("等着第一管试剂")
-                        .font(.system(size: cardWidth * 0.16, design: .rounded))
+                        .font(.system(size: smallText, design: .rounded))
                         .foregroundStyle(Theme.Color.textSecondary)
                 } else {
                     HStack(alignment: .bottom, spacing: cardWidth * 0.08) {
@@ -130,13 +140,15 @@ struct VesselPileView: View {
 struct Chip: View {
     let text: String
     var tint: SwiftUI.Color = Theme.Color.accent
+    /// 横幅在竖屏里要收一档字号，桌面不传这个参数、仍是 12
+    var size: CGFloat = 12
 
     var body: some View {
         Text(text)
-            .font(.system(size: 12, weight: .semibold, design: .rounded))
+            .font(.system(size: size, weight: .semibold, design: .rounded))
             .foregroundStyle(tint)
-            .padding(.horizontal, 10)
-            .padding(.vertical, 4)
+            .padding(.horizontal, size - 2)
+            .padding(.vertical, max(3, size - 8))
             .background(Capsule().strokeBorder(tint.opacity(0.5), lineWidth: 1))
             .background(Capsule().fill(SwiftUI.Color.black.opacity(0.28)))
     }

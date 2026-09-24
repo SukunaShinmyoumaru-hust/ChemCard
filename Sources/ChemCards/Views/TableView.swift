@@ -10,12 +10,25 @@ struct TableView: View {
 
     private var state: GameState { director.state }
 
-    @State private var inspected: Card?
     @State private var sortMode: HandSort = .category
 
     enum HandSort: String, CaseIterable {
         case category = "按类别"
         case activity = "按活性"
+
+        func apply(_ cards: [Card]) -> [Card] {
+            switch self {
+            case .category:
+                return cards.sorted {
+                    let a = CardCategory.allCases.firstIndex(of: $0.category) ?? 0
+                    let b = CardCategory.allCases.firstIndex(of: $1.category) ?? 0
+                    return a != b ? a < b : $0.title < $1.title
+                }
+            case .activity:
+                return cards.sorted { $0.activityScale != $1.activityScale
+                    ? $0.activityScale > $1.activityScale : $0.title < $1.title }
+            }
+        }
     }
 
     var body: some View {
@@ -97,7 +110,7 @@ struct TableView: View {
 
     private func humanArea(size: CGSize) -> some View {
         let cardWidth = min(size.width * 0.070, size.height * 0.150)
-        let hand = sorted(state.players[0].hand)
+        let hand = sortMode.apply(state.players[0].hand)
         let verdicts = Dictionary(uniqueKeysWithValues: hand.map { ($0.uid, state.playability(of: $0)) })
         return VStack(spacing: 6) {
             HandView(cards: hand,
@@ -105,8 +118,8 @@ struct TableView: View {
                      cardWidth: cardWidth,
                      enabled: state.phase == .playing && state.isHumanTurn,
                      reduceMotion: reduceMotion,
-                     onPlay: { director.play($0) },
-                     onInspect: { inspected = $0 })
+                     reveal: state.hintArmed,
+                     onPlay: { director.play($0) })
 
             ActionBar(director: director, cardWidth: cardWidth)
         }
@@ -134,20 +147,6 @@ struct TableView: View {
                 .padding(.horizontal, width * 0.12)
         }
         .frame(width: width, height: height)
-    }
-
-    private func sorted(_ cards: [Card]) -> [Card] {
-        switch sortMode {
-        case .category:
-            return cards.sorted {
-                let a = CardCategory.allCases.firstIndex(of: $0.category) ?? 0
-                let b = CardCategory.allCases.firstIndex(of: $1.category) ?? 0
-                return a != b ? a < b : $0.title < $1.title
-            }
-        case .activity:
-            return cards.sorted { $0.activityScale != $1.activityScale
-                ? $0.activityScale > $1.activityScale : $0.title < $1.title }
-        }
     }
 
     // MARK: 控制
@@ -188,16 +187,6 @@ struct TableView: View {
                     .position(x: size.width * 0.5, y: size.height * 0.635)
                     .transition(.opacity.combined(with: .move(edge: .bottom)))
                     .allowsHitTesting(false)
-            }
-
-            if let card = inspected {
-                SwiftUI.Color.black.opacity(0.35)
-                    .onTapGesture { inspected = nil }
-                CardInspector(card: card,
-                              verdict: state.playability(of: card, forSeat: 0),
-                              contents: state.contents,
-                              onClose: { inspected = nil })
-                    .position(x: size.width * 0.5, y: size.height * 0.44)
             }
 
             if director.showLog {
@@ -248,6 +237,16 @@ private struct ActionBar: View {
                 Text("\(state.currentPlayer.name) 正在出牌…")
                     .font(.system(size: 12.5, design: .rounded))
                     .foregroundStyle(Theme.Color.textSecondary)
+            }
+
+            if state.isHumanTurn, let skill = state.currentPlayer.character.skill {
+                Button { director.useSkill() } label: {
+                    Label(skill.displayName, systemImage: skill.symbol)
+                }
+                // 用过后仍然留着但置灰：让人看得见这一局的技能已经花掉
+                .disabled(!director.canUseSkill)
+                .keyboardShortcut("s", modifiers: [])
+                .help(state.currentPlayer.skillUsed ? "\(skill.displayName)：本局已经用过" : skill.hint)
             }
 
             if director.canPassTurn {

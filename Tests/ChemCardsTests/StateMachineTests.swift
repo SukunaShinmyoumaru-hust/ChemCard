@@ -24,6 +24,20 @@ final class StateMachineTests: XCTestCase {
         XCTAssertFalse(state.log.isEmpty, "开局要有记录")
     }
 
+    /// 阵容比座位多，选谁当主角都只能凑出 4 个不重复的人：
+    /// 早先 seats() 把「不是你」的角色全排上桌，角色一多就取难度表越界
+    func testEveryCharacterSeatsExactlyFourRivals() {
+        for human in CharacterID.allCases {
+            let players = MatchSetup.seats(human: human, table: .mixed)
+            XCTAssertEqual(players.count, MatchSetup.seatCount, "\(human.displayName) 开局人数不对")
+            XCTAssertEqual(Set(players.map(\.character)).count, MatchSetup.seatCount,
+                           "\(human.displayName) 开局有重复角色")
+            XCTAssertEqual(players[0].character, human)
+            XCTAssertNil(players[0].difficulty, "0 号位必须是人类")
+            XCTAssertEqual(players.dropFirst().compactMap(\.difficulty), TableDifficulty.mixed.seats)
+        }
+    }
+
     // MARK: 功能牌推进座位
 
     func testInertCardSkipsExactlyOneSeat() {

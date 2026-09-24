@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- 只放 GENERATE_INFOPLIST_FILE 不认的键：UIFileSharingEnabled 不在 INFOPLIST_KEY_ 白名单里，
+	     写成 INFOPLIST_KEY_UIFileSharingEnabled 会被静默丢掉。其余键仍由 Xcode 生成后合并进来。
+	     开了它，「文件」App 才能看到 Documents，换立绘才不用重编译。 -->
+	<key>UIFileSharingEnabled</key>
+	<true/>
+</dict>
+</plist>

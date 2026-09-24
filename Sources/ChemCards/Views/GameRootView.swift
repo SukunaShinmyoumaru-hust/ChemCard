@@ -4,17 +4,27 @@ import SwiftUI
 struct GameRootView: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
-    @State private var human: CharacterID = .reimu
+    @State private var human: CharacterID = .sanae
     @State private var table: TableDifficulty = .mixed
     @State private var round = 0
     @State private var inGame = false
     @State private var showRules = false
+
+    /// 默认从主菜单进；无头截图用 `--scene=` 直达某个界面，脚本没法替人点屏幕
+    init(scene: Smoke.Scene = .menu) {
+        _inGame = State(initialValue: scene != .menu && scene != .rules)
+        _showRules = State(initialValue: scene == .rules)
+        _scene = State(initialValue: scene)
+    }
+
+    @State private var scene: Smoke.Scene
 
     var body: some View {
         ZStack {
             if inGame {
                 GameScreen(players: MatchSetup.seats(human: human, table: table),
                            seed: MatchRules.defaultSeed &+ UInt64(round &* 7_919),
+                           scene: scene,
                            onExit: { inGame = false },
                            onRestart: { round += 1 })
                     .id(round)
@@ -29,92 +39,150 @@ struct GameRootView: View {
     // MARK: 主菜单
 
     private var menu: some View {
-        ZStack {
-            menuBackdrop
-
-            VStack(spacing: 20) {
-                VStack(spacing: 7) {
-                    Text("CHEMISTRY  POKER")
-                        .font(.system(size: 11, weight: .heavy, design: .rounded))
-                        .kerning(4)
-                        .foregroundStyle(Theme.Color.accent.opacity(0.9))
-                    Text("化学扑克牌")
-                        .font(Theme.Font.title(46))
-                        .foregroundStyle(Theme.Color.textPrimary)
-                    Text("容器里是一槽混合物，接得住才打得出去 · HCl + NaOH → NaCl + H₂O")
-                        .font(.system(size: 13.5, design: .rounded))
-                        .foregroundStyle(Theme.Color.textSecondary)
+        // 背景必须走 .background 而不是 ZStack 兄弟节点：scaledToFill 会把
+        // 自己放大后的尺寸（1112pt）报给 ZStack，ScrollView 于是按这个宽度排版，
+        // 内容整片被推到屏幕外，标题跑到 x=-347 去了
+        menuBody
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(menuBackdrop)
+            .overlay {
+                if showRules {
+                    RulesCard(onClose: { showRules = false })
+                        .transition(.opacity.combined(with: .scale(scale: 0.96)))
                 }
+            }
+            .animation(reduceMotion ? nil : .easeOut(duration: 0.2), value: showRules)
+    }
 
-                VStack(spacing: 16) {
-                    MenuSection(title: "你的立绘", note: "换图不用重新编译，覆盖 assets/Characters/<角色>/base.png 即可") {
-                        CharacterRow(selected: human, reduceMotion: reduceMotion) { human = $0 }
-                    }
+    /// 手机屏矮，装不下就得滚；桌面保持原来的固定居中
+    @ViewBuilder private var menuBody: some View {
+        if SceneLayout.isPhone {
+            GeometryReader { geo in
+                ScrollView(showsIndicators: false) {
+                    menuStack.frame(maxWidth: .infinity, minHeight: geo.size.height)
+                }
+            }
+        } else {
+            menuStack
+        }
+    }
 
-                    Divider().overlay(Theme.Color.panelStroke)
+    private var menuStack: some View {
+        VStack(spacing: SceneLayout.menuSpacing) {
+            menuHeader
+            menuPanel
+            menuActions
+            Text(SceneLayout.menuHint)
+                .font(.system(size: 12, design: .rounded))
+                .foregroundStyle(Theme.Color.textSecondary.opacity(0.8))
+        }
+        .padding(SceneLayout.menuPadding)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
 
-                    MenuSection(title: "对手强度", note: table.summary) {
-                        HStack(spacing: 10) {
-                            ForEach(TableDifficulty.allCases) { difficulty in
-                                DifficultyChoice(difficulty: difficulty,
-                                                 selected: difficulty == table) {
-                                    table = difficulty
-                                }
-                            }
+    private var menuHeader: some View {
+        VStack(spacing: 7) {
+            Text("CHEMISTRY  POKER")
+                .font(.system(size: 11, weight: .heavy, design: .rounded))
+                .kerning(4)
+                .foregroundStyle(Theme.Color.accent.opacity(0.9))
+            Text("化学扑克牌")
+                .font(Theme.Font.title(SceneLayout.titleSize))
+                .foregroundStyle(Theme.Color.textPrimary)
+            Text("容器里是一槽混合物，接得住才打得出去 · HCl + NaOH → NaCl + H₂O")
+                .font(.system(size: SceneLayout.subtitleSize, design: .rounded))
+                .foregroundStyle(Theme.Color.textSecondary)
+                .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
+                .frame(maxWidth: SceneLayout.subtitleWidth)
+        }
+    }
+
+    private var menuPanel: some View {
+        VStack(spacing: SceneLayout.panelSpacing) {
+            MenuSection(title: "你的立绘", note: SceneLayout.portraitNote) {
+                CharacterRow(selected: human, reduceMotion: reduceMotion) { human = $0 }
+            }
+
+            Divider().overlay(Theme.Color.panelStroke)
+
+            MenuSection(title: "对手强度", note: SceneLayout.difficultyNote(table.summary)) {
+                HStack(spacing: SceneLayout.difficultyChipSpacing) {
+                    ForEach(TableDifficulty.allCases) { difficulty in
+                        DifficultyChoice(difficulty: difficulty,
+                                         selected: difficulty == table) {
+                            table = difficulty
                         }
                     }
                 }
-                .padding(22)
-                .frame(maxWidth: 780)
-                .background(RoundedRectangle(cornerRadius: 20, style: .continuous)
-                    .fill(SwiftUI.Color(white: 0.06).opacity(0.88)))
-                .overlay(RoundedRectangle(cornerRadius: 20, style: .continuous)
-                    .strokeBorder(Theme.Color.panelStroke, lineWidth: 1))
-                .overlay(alignment: .top) {
-                    Capsule()
-                        .fill(LinearGradient(colors: [Theme.Color.accent.opacity(0.55), SwiftUI.Color.clear],
-                                             startPoint: .leading, endPoint: .trailing))
-                        .frame(height: 2)
-                        .padding(.horizontal, 24)
-                        .padding(.top, 2)
-                }
-                .shadow(color: .black.opacity(0.5), radius: 26, x: 0, y: 14)
-
-                HStack(spacing: 14) {
-                    Button { inGame = true } label: {
-                        Text("开始反应")
-                            .fontWeight(.bold)
-                            .frame(width: 180, height: 40)
-                    }
-                    .keyboardShortcut(.defaultAction)
-                    .buttonStyle(.borderedProminent)
-                    .controlSize(.large)
-                    .tint(Theme.Color.accent)
-
-                    Button { showRules.toggle() } label: {
-                        Text("玩法与规则")
-                            .fontWeight(.semibold)
-                            .frame(width: 140, height: 40)
-                    }
-                    .buttonStyle(.bordered)
-                    .controlSize(.large)
-                    .tint(SwiftUI.Color.white.opacity(0.16))
-                }
-
-                Text("提示：接不上就摸牌；灰掉的牌长按或右键，能看出它为什么不反应。")
-                    .font(.system(size: 12, design: .rounded))
-                    .foregroundStyle(Theme.Color.textSecondary.opacity(0.8))
-            }
-            .padding(34)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-        }
-        .overlay {
-            if showRules {
-                RulesCard(onClose: { showRules = false })
-                    .transition(.opacity.combined(with: .scale(scale: 0.96)))
             }
         }
-        .animation(reduceMotion ? nil : .easeOut(duration: 0.2), value: showRules)
+        .padding(SceneLayout.panelPadding)
+        .frame(maxWidth: SceneLayout.panelMaxWidth)
+        .background(RoundedRectangle(cornerRadius: 20, style: .continuous)
+            .fill(SwiftUI.Color(white: 0.06).opacity(0.88)))
+        .overlay(RoundedRectangle(cornerRadius: 20, style: .continuous)
+            .strokeBorder(Theme.Color.panelStroke, lineWidth: 1))
+        .overlay(alignment: .top) {
+            Capsule()
+                .fill(LinearGradient(colors: [Theme.Color.accent.opacity(0.55), SwiftUI.Color.clear],
+                                     startPoint: .leading, endPoint: .trailing))
+                .frame(height: 2)
+                .padding(.horizontal, 24)
+                .padding(.top, 2)
+        }
+        .shadow(color: .black.opacity(0.5), radius: 26, x: 0, y: 14)
+    }
+
+    @ViewBuilder private var menuActions: some View {
+        if SceneLayout.isPhone {
+            VStack(spacing: 10) {
+                startButton
+                rulesButton
+            }
+        } else {
+            HStack(spacing: 14) {
+                startButton
+                rulesButton
+            }
+        }
+    }
+
+    private var startButton: some View {
+        Button { inGame = true } label: {
+            Text("开始反应")
+                .fontWeight(.bold)
+                .buttonSized(width: SceneLayout.startButtonWidth, height: SceneLayout.buttonHeight)
+        }
+        .keyboardShortcut(.defaultAction)
+        .buttonStyle(.borderedProminent)
+        .controlSize(.large)
+        .tint(Theme.Color.accent)
+    }
+
+    /// 手机上 .bordered + 16% 白底几乎看不见，得自己描一圈边、把字提亮
+    @ViewBuilder private var rulesButton: some View {
+        if SceneLayout.isPhone {
+            Button { showRules.toggle() } label: {
+                Text("玩法与规则")
+                    .fontWeight(.semibold)
+                    .frame(maxWidth: .infinity, minHeight: SceneLayout.buttonHeight)
+            }
+            .buttonStyle(.bordered)
+            .tint(SwiftUI.Color.white.opacity(0.14))
+            .foregroundStyle(Theme.Color.textPrimary)
+            .overlay(RoundedRectangle(cornerRadius: 11, style: .continuous)
+                .strokeBorder(Theme.Color.panelStroke, lineWidth: 1))
+        } else {
+            Button { showRules.toggle() } label: {
+                Text("玩法与规则")
+                    .fontWeight(.semibold)
+                    .frame(width: SceneLayout.rulesButtonWidth, height: SceneLayout.buttonHeight)
+            }
+            .buttonStyle(.bordered)
+            .controlSize(.large)
+            .tint(SwiftUI.Color.white.opacity(0.16))
+        }
     }
 
     /// 牌桌背景优先，缺图退化成渐变；压暗一层标题和立绘才站得住
@@ -143,34 +211,48 @@ struct GameScreen: View {
     var onExit: () -> Void
     var onRestart: () -> Void
 
-    init(players: [Player], seed: UInt64, onExit: @escaping () -> Void, onRestart: @escaping () -> Void) {
-        _director = StateObject(wrappedValue: StageDirector(players: players, seed: seed))
+    init(players: [Player],
+         seed: UInt64,
+         scene: Smoke.Scene = .menu,
+         onExit: @escaping () -> Void,
+         onRestart: @escaping () -> Void) {
+        let director = StageDirector(players: players, seed: seed)
+        Smoke.stage(director, for: scene)
+        _director = StateObject(wrappedValue: director)
         self.onExit = onExit
         self.onRestart = onRestart
     }
 
-    var body: some View {
-        TableView(director: director, onExit: onExit, onRestart: onRestart)
+    @ViewBuilder var body: some View {
+        if SceneLayout.isPhone {
+            PhoneTableView(director: director, onExit: onExit, onRestart: onRestart)
+        } else {
+            TableView(director: director, onExit: onExit, onRestart: onRestart)
+        }
     }
 }
 
 /// 菜单里的一段：左侧标题、右侧一行小字说明
-private struct MenuSection<Content: View>: View {
+struct MenuSection<Content: View>: View {
     let title: String
     var note: String?
     @ViewBuilder var content: Content
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            HStack(alignment: .firstTextBaseline, spacing: 10) {
-                Text(title)
-                    .font(.system(size: 13, weight: .bold, design: .rounded))
-                    .foregroundStyle(Theme.Color.accent)
-                if let note {
-                    Text(note)
-                        .font(.system(size: 11.5, design: .rounded))
-                        .foregroundStyle(Theme.Color.textSecondary)
-                        .multilineTextAlignment(.trailing)
+            if SceneLayout.isPhone {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(title)
+                        .font(.system(size: 13, weight: .bold, design: .rounded))
+                        .foregroundStyle(Theme.Color.accent)
+                    noteText
+                }
+            } else {
+                HStack(alignment: .firstTextBaseline, spacing: 10) {
+                    Text(title)
+                        .font(.system(size: 13, weight: .bold, design: .rounded))
+                        .foregroundStyle(Theme.Color.accent)
+                    noteText
                         .frame(maxWidth: .infinity, alignment: .trailing)
                 }
             }
@@ -178,10 +260,22 @@ private struct MenuSection<Content: View>: View {
                 .frame(maxWidth: .infinity, alignment: .center)
         }
     }
+
+    private var noteText: some View {
+        Group {
+            if let note {
+                Text(note)
+                    .font(.system(size: 11.5, design: .rounded))
+                    .foregroundStyle(Theme.Color.textSecondary)
+                    .multilineTextAlignment(.trailing)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+    }
 }
 
 /// 立绘选择条：动画时钟只包住这一条，主菜单其余部分不必跟着每帧重算
-private struct CharacterRow: View {
+struct CharacterRow: View {
     let selected: CharacterID
     var reduceMotion: Bool
     var onPick: (CharacterID) -> Void
@@ -197,57 +291,91 @@ private struct CharacterRow: View {
     }
 
     private func row(time: Double) -> some View {
-        HStack(spacing: 18) {
-            ForEach(CharacterID.allCases) { character in
-                CharacterChoice(character: character,
-                                selected: character == selected,
-                                time: time,
-                                reduceMotion: reduceMotion) {
-                    onPick(character)
+        // LazyVGrid 在这个 ScrollView 里整片渲染成空白，七个格子也用不着 lazy
+        VStack(spacing: SceneLayout.characterSpacing) {
+            ForEach(Array(characterRows.enumerated()), id: \.offset) { _, characters in
+                HStack(spacing: SceneLayout.characterSpacing) {
+                    ForEach(characters) { choice($0, time) }
                 }
             }
         }
     }
+
+    /// 一行只放得下 SceneLayout.characterColumns 个立绘，剩下的折到下一行
+    private var characterRows: [[CharacterID]] {
+        let all = CharacterID.allCases
+        let columns = SceneLayout.characterColumns
+        return stride(from: 0, to: all.count, by: columns)
+            .map { Array(all[$0..<min($0 + columns, all.count)]) }
+    }
+
+    private func choice(_ character: CharacterID, _ time: Double) -> some View {
+        CharacterChoice(character: character,
+                        selected: character == selected,
+                        time: time,
+                        reduceMotion: reduceMotion,
+                        portrait: SceneLayout.portraitSize) {
+            onPick(character)
+        }
+    }
 }
 
-private struct CharacterChoice: View {
+struct CharacterChoice: View {
     let character: CharacterID
     let selected: Bool
     var time: Double
     var reduceMotion: Bool
+    var portrait: CGFloat
     var onPick: () -> Void
 
     var body: some View {
         Button(action: onPick) {
-            VStack(spacing: 8) {
+            HStack(spacing: 12) {
                 PortraitRig(character: character,
                             mood: selected ? .win : .idle,
-                            size: 118,
+                            size: portrait,
                             time: time,
                             reduceMotion: reduceMotion)
                     .overlay(alignment: .bottomTrailing) {
                         if selected {
                             Image(systemName: "checkmark.seal.fill")
-                                .font(.system(size: 22))
+                                .font(.system(size: 18))
                                 .foregroundStyle(Theme.Color.legalGlow)
-                                .padding(5)
+                                .padding(3)
                         }
                     }
-                Text(character.displayName)
-                    .font(.system(size: 13, weight: .semibold, design: .rounded))
-                    .foregroundStyle(selected ? Theme.Color.textPrimary : Theme.Color.textSecondary)
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(character.displayName)
+                        .font(.system(size: 13, weight: .semibold, design: .rounded))
+                        .foregroundStyle(selected ? Theme.Color.textPrimary : Theme.Color.textSecondary)
+                    // 选人的时候就得知道自己选到了什么技能，一局一次不能靠试
+                    if let skill = character.skill {
+                        Text(skill.displayName)
+                            .font(.system(size: 11, weight: .semibold, design: .rounded))
+                            .foregroundStyle(Theme.Color.accent)
+                    }
+                }
+                Spacer(minLength: 8)
+                if let skill = character.skill {
+                    Text(skill.hint)
+                        .font(.system(size: 10.5, design: .rounded))
+                        .foregroundStyle(Theme.Color.textSecondary)
+                        .multilineTextAlignment(.trailing)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
             }
-            .padding(10)
-            .background(RoundedRectangle(cornerRadius: 16, style: .continuous)
+            .padding(8)
+            .frame(maxWidth: .infinity)
+            .background(RoundedRectangle(cornerRadius: 14, style: .continuous)
                 .fill(selected ? Theme.Color.accent.opacity(0.14) : Theme.Color.panel))
-            .overlay(RoundedRectangle(cornerRadius: 16, style: .continuous)
+            .overlay(RoundedRectangle(cornerRadius: 14, style: .continuous)
                 .strokeBorder(selected ? Theme.Color.accent : Theme.Color.panelStroke, lineWidth: 1.4))
         }
         .buttonStyle(.plain)
     }
 }
 
-private struct DifficultyChoice: View {
+struct DifficultyChoice: View {
     let difficulty: TableDifficulty
     let selected: Bool
     var onPick: () -> Void
@@ -262,7 +390,7 @@ private struct DifficultyChoice: View {
                     .opacity(0.7)
             }
             .foregroundStyle(selected ? SwiftUI.Color(white: 0.08) : Theme.Color.textPrimary)
-            .frame(width: 108, height: 46)
+            .frame(width: SceneLayout.difficultyChipWidth, height: 46)
             .background(RoundedRectangle(cornerRadius: 11, style: .continuous)
                 .fill(selected ? Theme.Color.accent : Theme.Color.panel))
             .overlay(RoundedRectangle(cornerRadius: 11, style: .continuous)
@@ -274,32 +402,37 @@ private struct DifficultyChoice: View {
 }
 
 /// 规则卡：把玩法一次讲清楚
-private struct RulesCard: View {
+struct RulesCard: View {
     var onClose: () -> Void
 
-    private let sections: [(String, [String])] = [
-        ("出牌", [
-            "反应容器里是一槽混合物：最近倒进去的三种物质都还在，你打出的试剂牌必须能和其中至少一种真正发生化学反应，方程式由反应表裁定。",
-            "接不上就摸一张，摸完这一手就交给下家。牌堆空了会把容器里用掉的旧牌洗回牌堆；连旧牌都不剩、手里又一张都接不上，这一手过牌。",
-            "功能牌任何时候都能打，它们只是操作，不往容器里加物质。",
-            "灰掉的牌长按 0.45 秒或右键「检视这张牌」，会写明它为什么接不上。"
-        ]),
-        ("胜负", [
-            "谁先出完手牌谁立刻赢，不看分数。",
-            "手里只剩一张时必须先喊「反应!」（空格）再出牌，忘了罚抽一张。",
-            "结算会点名本局最漂亮的一次反应：配平最复杂、现象最丰富的那一手。"
-        ]),
-        ("功能牌", [
-            "注液泵 +2：下家摸两张并跳过回合。",
-            "惰性气氛：下家跳过一回合。",
-            "可逆反应：出牌方向反向。",
-            "检液：偷看牌堆顶三张。"
-        ]),
-        ("其它", [
-            "AI 只能看到公开信息：自己的手牌、弃牌堆、各家手牌张数和牌堆剩余量。",
-            "牌桌立绘和背景可以替换：把图片放进 ~/Library/Application Support/ChemCards/assets/Characters/<角色>/ 即可，不用重新编译。"
-        ])
-    ]
+    private var sections: [(String, [String])] {
+        [
+            ("出牌", [
+                "反应容器里是一槽混合物：最近倒进去的三种物质都还在，你打出的试剂牌必须能和其中至少一种真正发生化学反应，方程式由反应表裁定。",
+                "接不上就摸一张，摸完这一手就交给下家。牌堆空了会把容器里用掉的旧牌洗回牌堆；连旧牌都不剩、手里又一张都接不上，这一手过牌。",
+                "功能牌任何时候都能打，它们只是操作，不往容器里加物质。",
+                SceneLayout.verdictLine
+            ]),
+            ("胜负", [
+                "谁先出完手牌谁立刻赢，不看分数。",
+                SceneLayout.callLine,
+                "结算会点名本局最漂亮的一次反应：配平最复杂、现象最丰富的那一手。"
+            ]),
+            ("功能牌", [
+                "注液泵 +2：下家摸两张并跳过回合。",
+                "惰性气氛：下家跳过一回合。",
+                "可逆反应：出牌方向反向。",
+                "检液：偷看牌堆顶三张。"
+            ]),
+            ("角色技能", CharacterID.allCases.compactMap { character in
+                character.skill.map { "\(character.displayName)「\($0.displayName)」：\($0.hint)。" }
+            } + ["技能每局只能用一次，只有你手上这个角色有；AI 不用技能。"]),
+            ("其它", [
+                "AI 只能看到公开信息：自己的手牌、弃牌堆、各家手牌张数和牌堆剩余量。",
+                SceneLayout.assetLine
+            ])
+        ]
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
@@ -309,7 +442,7 @@ private struct RulesCard: View {
                 Spacer()
                 Button(action: onClose) {
                     Image(systemName: "xmark.circle.fill")
-                        .font(.system(size: 18))
+                        .font(.system(size: SceneLayout.isPhone ? 26 : 18))
                         .foregroundStyle(Theme.Color.textSecondary)
                 }
                 .buttonStyle(.plain)
@@ -337,9 +470,11 @@ private struct RulesCard: View {
             }
         }
         .padding(22)
-        .frame(width: 560, height: 520)
-        .background(RoundedRectangle(cornerRadius: 18, style: .continuous).fill(SwiftUI.Color(white: 0.09)))
-        .overlay(RoundedRectangle(cornerRadius: 18, style: .continuous)
+        .padding(.bottom, SceneLayout.rulesExtraBottom)
+        .frame(width: SceneLayout.rulesSize?.width, height: SceneLayout.rulesSize?.height)
+        .background(RoundedRectangle(cornerRadius: SceneLayout.rulesCorner, style: .continuous)
+            .fill(SwiftUI.Color(white: 0.09)))
+        .overlay(RoundedRectangle(cornerRadius: SceneLayout.rulesCorner, style: .continuous)
             .strokeBorder(Theme.Color.panelStroke, lineWidth: 1))
         .shadow(color: .black.opacity(0.6), radius: 30, x: 0, y: 16)
     }

@@ -1,0 +1,9 @@
+# iOS 工程由 ios/make-ios-project.py 每次重新生成，Xcode 打开时还会落下 xcuserdata
+ios/ChemCardsiOS.xcodeproj/
+# 模拟器编译产物（173M），bash ios.sh build 会重建
+ios-derived/
+# 真机编译产物，bash ios.sh device 会重建
+ios-device/
+# SwiftPM 被 Xcode 打开时的个人界面状态，跟代码无关
+.swiftpm/
+.DS_Store

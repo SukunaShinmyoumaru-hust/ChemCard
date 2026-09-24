@@ -17,6 +17,7 @@ enum RenderHarness {
         let root: AnyView
         switch scene {
         case "table": root = AnyView(tableScene(size: size))
+        case "rules": root = AnyView(GameRootView(scene: .rules))
         case "cards": root = AnyView(cardScene())
         case "banner": root = AnyView(bannerScene())
         case "log": root = AnyView(logScene())
@@ -56,11 +57,23 @@ enum RenderHarness {
     // MARK: 场景
 
     private static func tableScene(size: NSSize) -> some View {
-        let director = StageDirector(players: MatchSetup.seats(human: .reimu, table: .mixed),
+        let director = StageDirector(players: MatchSetup.seats(human: .sanae, table: .mixed),
                                      seed: 0xC0FF_EE01)
         advance(director, hands: 7)
+        // 停在 AI 回合时整排手牌都是压暗的「还没轮到你」，看不出默认给不给牌标色
+        advanceUntilHumanTurn(director)
         return TableView(director: director, onExit: {}, onRestart: {})
             .frame(width: size.width, height: size.height)
+    }
+
+    /// 替 AI 走子，直到轮到 0 号位为止
+    private static func advanceUntilHumanTurn(_ director: StageDirector, cap: Int = 40) {
+        for _ in 0..<cap {
+            let state = director.state
+            if state.phase.isOver || state.isHumanTurn { return }
+            guard let decision = state.aiDecision() else { return }
+            state.apply(decision)
+        }
     }
 
     /// 0 号位是人类，截图时替它出牌，其余交给导演的 AI 时钟
@@ -109,7 +122,7 @@ enum RenderHarness {
     }
 
     private static func logScene() -> some View {
-        let director = StageDirector(players: MatchSetup.seats(human: .reimu, table: .expert),
+        let director = StageDirector(players: MatchSetup.seats(human: .sanae, table: .expert),
                                      seed: 0xC0FF_EE02)
         advance(director, hands: 14)
         return HStack(spacing: 0) {

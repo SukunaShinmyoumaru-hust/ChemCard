@@ -5,9 +5,14 @@ struct ReactionBannerView: View {
     let event: GameState.PlayEvent
     var playerName: String
     var reduceMotion = false
+    /// 竖屏在对手条带和容器条带之间只有百来 pt，字号和留白都收一档，别让横幅压到牌上
+    var compact = false
+
+    private var gap: CGFloat { compact ? 6 : 10 }
+    private var chipSize: CGFloat { compact ? 10.5 : 12 }
 
     var body: some View {
-        VStack(spacing: 10) {
+        VStack(spacing: gap) {
             HStack(spacing: 8) {
                 Text(playerName)
                     .font(.system(size: 13, weight: .semibold, design: .rounded))
@@ -23,33 +28,34 @@ struct ReactionBannerView: View {
 
             if let reaction = event.reaction {
                 Text(reaction.displayEquation)
-                    .font(Theme.Font.formula(30, weight: .bold))
+                    .font(Theme.Font.formula(compact ? 22 : 30, weight: .bold))
                     .minimumScaleFactor(0.55)
                     .lineLimit(1)
                     .foregroundStyle(Theme.Color.textPrimary)
                     .padding(.vertical, 2)
 
-                HStack(spacing: 8) {
-                    Chip(text: reaction.rule, tint: Theme.Color.accent)
+                HStack(spacing: compact ? 5 : 8) {
+                    Chip(text: reaction.rule, tint: Theme.Color.accent, size: chipSize)
                     ForEach(Array(reaction.phenomena.enumerated()), id: \.offset) { _, phenomenon in
-                        Chip(text: phenomenon.text, tint: phenomenonTint(phenomenon))
+                        Chip(text: phenomenon.text, tint: phenomenonTint(phenomenon), size: chipSize)
                     }
                     Chip(text: reaction.tier.displayName,
                          tint: reaction.tier == .senior ? SwiftUI.Color(red: 0.98, green: 0.72, blue: 0.36)
-                                                        : Theme.Color.textSecondary)
+                                                        : Theme.Color.textSecondary,
+                         size: chipSize)
                 }
 
                 if let note = reaction.note {
                     Text(note)
-                        .font(.system(size: 12.5, design: .rounded))
+                        .font(.system(size: compact ? 11.5 : 12.5, design: .rounded))
                         .foregroundStyle(Theme.Color.textSecondary)
-                        .lineSpacing(3)
+                        .lineSpacing(compact ? 2 : 3)
                         .fixedSize(horizontal: false, vertical: true)
                 }
             }
         }
-        .padding(.horizontal, 22)
-        .padding(.vertical, 16)
+        .padding(.horizontal, compact ? 14 : 22)
+        .padding(.vertical, compact ? 10 : 16)
         .frame(maxWidth: 620)
         .background(
             RoundedRectangle(cornerRadius: 18, style: .continuous)

@@ -34,6 +34,11 @@ final class GameState: ObservableObject {
     @Published private(set) var preview: [Card] = []
     @Published private(set) var lastEvent: PlayEvent?
     @Published private(set) var best: BestReaction?
+    /// 手牌要不要标出接得接不上。平时为假：看颜色出牌学不到化学，
+    /// 只有永琳的「诊断」会把它点亮，且只亮一个回合
+    @Published private(set) var hintArmed = false
+    /// 「The World」攒下的额外出牌次数，用完即清
+    @Published private(set) var bonusPlay = 0
 
     let rules: MatchRules
     private var rng: SplitMix64
@@ -47,6 +52,8 @@ final class GameState: ObservableObject {
             var fresh = seat
             fresh.hand = []
             fresh.calledReaction = false
+            fresh.skillUsed = false
+            fresh.frozen = 0
             return fresh
         }
         deal()
@@ -178,6 +185,61 @@ final class GameState: ObservableObject {
         return true
     }
 
+    /// 技能按钮该不该亮。魔炮在牌堆和弃牌堆都拿不出物质牌时会打空，这时不能算用过一次。
+    var canUseSkill: Bool {
+        guard phase == .playing, isHumanTurn,
+              let skill = currentPlayer.character.skill, !currentPlayer.skillUsed else { return false }
+        return skill != .masterSpark || blastable
+    }
+
+    /// 发动当前角色的技能：一局一次，只有人类能主动按。返回是否生效。
+    @discardableResult
+    func useSkill() -> Bool {
+        guard canUseSkill, let skill = currentPlayer.character.skill else { return false }
+        let seat = turn
+        players[seat].skillUsed = true
+
+        if let action = skill.action {
+            advanceTurn(skipping: applyAction(action, seat: seat, cause: "发动「\(skill.displayName)」"))
+            return true
+        }
+        switch skill {
+        case .masterSpark:
+            blastVessel(seat: seat)
+            advanceTurn(skipping: 0)
+        case .doublePlay:
+            bonusPlay += 1
+            record(seat: seat, text: "\(players[seat].name) 发动「The World」：这一回合可以出两张牌")
+        case .selfFreeze:
+            players[seat].frozen += 1
+            record(seat: seat, text: "\(players[seat].name) 发动「完美冻结」：把自己冻在容器里，下次轮到她时跳过")
+            advanceTurn(skipping: 0)
+        case .reveal:
+            hintArmed = true
+            record(seat: seat, text: "\(players[seat].name) 发动「万解诊断」：这一回合接得住的牌会发光")
+        case .dreamSeal, .miracle, .reversal:
+            break
+        }
+        return true
+    }
+
+    /// 牌堆里（把弃牌堆回收进来算上）还有没有物质牌能轰进容器
+    private var blastable: Bool {
+        if stock.contains(where: { $0.species != nil }) { return true }
+        guard let start = oldestContentsIndex, start > 0 else { return false }
+        return vessel[0..<start].contains(where: { $0.species != nil })
+    }
+
+    /// 魔炮：把牌堆最上面那张物质牌搬进容器。只搬牌不造牌，牌堆总数守恒。
+    private func blastVessel(seat: Int) {
+        if stock.lastIndex(where: { $0.species != nil }) == nil { recycleVessel() }
+        guard let index = stock.lastIndex(where: { $0.species != nil }) else { return }
+        let card = stock.remove(at: index)
+        vessel.append(card)
+        let names = contents.map(\.name).joined(separator: "、")
+        record(seat: seat, text: "\(players[seat].name) 发动「魔炮」：把\(card.title)轰进容器，容器里现存\(names)")
+    }
+
     private func perform(_ card: Card, _ verdict: Playability) {
         let seat = turn
         players[seat].hand.removeAll { $0.uid == card.uid }
@@ -196,21 +258,7 @@ final class GameState: ObservableObject {
                    reaction: reaction)
         case .action(let action):
             lastEvent = PlayEvent(seat: seat, card: card, reaction: nil)
-            switch action {
-            case .pump:
-                pendingDraw += rules.pumpAmount
-                record(seat: seat, text: "\(players[seat].name) 使用注液泵：下家摸\(rules.pumpAmount)张并跳过回合")
-            case .inert:
-                skipped = 1
-                record(seat: seat, text: "\(players[seat].name) 营造惰性气氛：下家跳过一回合")
-            case .reversible:
-                direction *= -1
-                record(seat: seat, text: "\(players[seat].name) 声明可逆反应：出牌改为\(directionText)")
-            case .assay:
-                preview = Array(stock.suffix(action.previewCount).reversed())
-                let names = preview.map(\.title).joined(separator: "、")
-                record(seat: seat, text: "\(players[seat].name) 检液：牌堆顶是\(names.isEmpty ? "（已空）" : names)")
-            }
+            skipped = applyAction(action, seat: seat, cause: "使用\(action.displayName)")
         case .illegal:
             return
         }
@@ -226,7 +274,36 @@ final class GameState: ObservableObject {
             record(seat: seat, text: "\(players[seat].name) 出完手牌，胜利！")
             return
         }
+        if bonusPlay > 0 {
+            bonusPlay -= 1
+            // 双发把「跳过下家」往后挪一位，不然这张功能牌的效果会凭空消失
+            if skipped > 0 { players[stepped(from: turn)].frozen += skipped }
+            record(seat: seat, text: "「The World」：\(players[seat].name) 这一回合还能再出一张")
+            return
+        }
         advanceTurn(skipping: skipped)
+    }
+
+    /// 功能牌的效果结算。灵梦/早苗/正邪三个技能也走这里，等价关系由功能牌的测试锁住。
+    private func applyAction(_ action: ActionCard, seat: Int, cause: String) -> Int {
+        switch action {
+        case .pump:
+            pendingDraw += rules.pumpAmount
+            record(seat: seat, text: "\(players[seat].name) \(cause)：下家摸\(rules.pumpAmount)张并跳过回合")
+            return 0
+        case .inert:
+            record(seat: seat, text: "\(players[seat].name) \(cause)：下家跳过一回合")
+            return 1
+        case .reversible:
+            direction *= -1
+            record(seat: seat, text: "\(players[seat].name) \(cause)：出牌改为\(directionText)")
+            return 0
+        case .assay:
+            preview = Array(stock.suffix(action.previewCount).reversed())
+            let names = preview.map(\.title).joined(separator: "、")
+            record(seat: seat, text: "\(players[seat].name) \(cause)：牌堆顶是\(names.isEmpty ? "（已空）" : names)")
+            return 0
+        }
     }
 
     private func drawAndPass() -> Bool {
@@ -270,9 +347,11 @@ final class GameState: ObservableObject {
     }
 
     private func advanceTurn(skipping: Int) {
+        hintArmed = false
+        bonusPlay = 0
         var next = turn
         for _ in 0..<(1 + skipping) {
-            next = (next + direction + seatCount) % seatCount
+            next = stepped(from: next)
         }
         turn = next
         turnsPlayed += 1
@@ -280,14 +359,35 @@ final class GameState: ObservableObject {
             stall()
             return
         }
-        guard pendingDraw > 0 else { return }
-        let amount = pendingDraw
-        pendingDraw = 0
-        let got = drawCards(seat: turn, count: amount)
-        record(seat: turn, text: "\(currentPlayer.name) 被注液泵注入\(got)张牌，跳过本回合")
-        turn = (turn + direction + seatCount) % seatCount
-        turnsPlayed += 1
-        if turnsPlayed >= rules.maxTurns { stall() }
+        if pendingDraw > 0 {
+            let amount = pendingDraw
+            pendingDraw = 0
+            let got = drawCards(seat: turn, count: amount)
+            record(seat: turn, text: "\(currentPlayer.name) 被注液泵注入\(got)张牌，跳过本回合")
+            turn = stepped(from: turn)
+            turnsPlayed += 1
+            if turnsPlayed >= rules.maxTurns {
+                stall()
+                return
+            }
+        }
+        skipFrozenSeats()
+    }
+
+    private func stepped(from seat: Int) -> Int { (seat + direction + seatCount) % seatCount }
+
+    /// 轮到动不了的座位就往后推，每推一位算一 hands，靠 maxTurns 兜底不会死循环
+    private func skipFrozenSeats() {
+        while players[turn].frozen > 0 {
+            players[turn].frozen -= 1
+            record(seat: turn, text: "\(players[turn].name) 动不了，跳过本回合")
+            turn = stepped(from: turn)
+            turnsPlayed += 1
+            if turnsPlayed >= rules.maxTurns {
+                stall()
+                return
+            }
+        }
     }
 
     private func stall() {
@@ -340,12 +440,16 @@ final class GameState: ObservableObject {
         for index in players.indices {
             players[index].hand = index < hands.count ? hands[index] : []
             players[index].calledReaction = false
+            players[index].skillUsed = false
+            players[index].frozen = 0
         }
         self.vessel = vessel
         self.stock = stock
         self.turn = seat % seatCount
         self.direction = direction
         self.pendingDraw = 0
+        self.hintArmed = false
+        self.bonusPlay = 0
         self.phase = .playing
         self.turnsPlayed = 0
     }

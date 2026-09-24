@@ -1,6 +1,6 @@
 # 化学扑克牌 ChemCards
 
-macOS 原生桌游。玩法像 UNO，但**只有能和反应容器（一槽混合物）发生化学反应的牌才打得出去**——裁判不是数值，是一张真实的反应表。
+macOS / iPhone 原生桌游。玩法像 UNO，但**只有能和反应容器（一槽混合物）发生化学反应的牌才打得出去**——裁判不是数值，是一张真实的反应表。
 
 单机 PVE：你 + 3 个 AI（初级 / 进阶 / 高级 / 混合桌）。
 
@@ -31,21 +31,65 @@ swift test                 # 自检：化学守恒、非法出牌、AI 自动对
 xattr -cr dist/ChemCards.app
 ```
 
+## iPhone（竖屏）
+
+同一套 `Sources/ChemCards` 编译成 iOS 应用，界面按平台分叉：`SceneLayout.isPhone` 为真时用 `PhoneTableView`，六条横向分带替掉桌面那张按横屏比例摆位的牌桌。工程文件由脚本生成，不用手维护：
+
+```bash
+bash ios.sh                 # 生成工程 → 模拟器编译 → 装机 → 启动 → 截图 docs/preview-ios.png
+bash ios.sh shots           # 六个场景各截一张（menu rules table banner log result）
+DEVICE='iPhone SE (3rd generation)' TAG=-se3 bash ios.sh shots   # 换一台机器再截一套
+```
+
+竖屏没有菜单栏，手册 / 重开 / 主菜单做成工具条上的图标；出牌改成**两段式**：点一张牌，下面那条会写明它接不接得上、为什么，再按「出牌」确认——叠牌时相邻两张只差 20pt，点即出会打错而且收不回来。
+
+![iPhone 牌桌](docs/preview-ios-table.png) ![反应横幅](docs/preview-ios-banner.png)
+
+### 装到自己手机上
+
+这台机器上没有签名身份，`ios.sh` 只走模拟器。真机要作者自己在 Xcode 里做一次：
+
+```bash
+bash ios.sh phone           # 缺什么直接说：证书、Team ID
+```
+
+1. Xcode → Settings → Accounts 登录 Apple ID，`ios.sh phone` 报缺证书就顺手在 Manage Certificates 里加一张。
+2. 打开 `ios/ChemCardsiOS.xcodeproj`，选中 ChemCards target → Signing & Capabilities → Team 选自己的 Apple ID。Team ID 会写进 `ios/signing.xcconfig`——生成器每次重写 `project.pbxproj`，唯独不动这个文件，所以选好的 Team 不会被下一次重新生成抹掉。
+3. 手机插上线、点「信任这台电脑」，scheme 选这台 iPhone，⌘R。
+
+免费 Apple ID 签出来的包 **7 天过期**，图标点开会闪退；重跑一次 ⌘R 就续上。付费开发者账号是一年。
+
 ## 玩法
 
 1. 每人起手 7 张，轮流出牌。
-2. **容器是一槽混合物**：最近倒进去的 **3 种**物质都还活着，打出的牌只要能跟其中**任意一种**反应就合法。引擎判定合法才允许点击，非法的牌灰显。
+2. **容器是一槽混合物**：最近倒进去的 **3 种**物质都还活着，打出的牌只要能跟其中**任意一种**反应就合法。引擎判定合法才允许点击，**平时不给提示**——不发光、不灰显，接不接得上得自己算。
 3. 你打出的牌倒进容器，成为新的第 4 种——最早那一种同时沉底、不再参与反应。下家必须接得住这槽混合物。
 4. 接不上就摸牌：轮到自己时随时可以主动摸一张，摸完这一手就结束了。
 5. 牌堆空了会把容器里用掉的旧牌回收重洗；连旧牌都不剩、手里又一张都接不上时，这一手**过牌**。
 6. 手牌只剩 1 张时必须喊「**反应!**」（空格），忘了罚摸 1 张。
 7. **先出完手牌的人立刻获胜**，其余按手里剩几张排名。没有分数，没有连锁，方程式本身就是唯一的评价。
 
-窗口宽度是 `MatchRules.vesselWindow`（默认 3）。这个设计是防死锁的正解：一局里「有牌可出」的比例足够高，才不需要「物理混合」那种不算反应的后门。
+窗口宽度是 `MatchRules.vesselWindow`（默认 3）。这个设计是防死锁的正解：一局里「有牌可出」的比例足够高，才不需要「物理混合」那种不算反应的后门。收窄试过两档，都回退了：1 槽三档中位 573~575 手、40 局只有 5~13 局有人出完（45% 的回合完全接不住）；2 槽进阶/高级收束到 45~47 手，但初级桌仍拖到 213 手、8/40 局卡壳。要再收窄，得先把反应表加厚——现在每种物质的伙伴牌中位 18/88，约 17% 命中率，UNO 是 85%。
 
-灰牌不是死的：**长按 0.45 秒**或**右键 → 检视这张牌**会弹出一张详情卡，写着它的类别、溶解性、活性，以及「和容器里这几种物质为什么不反应」——这是给初学者的电子手册。
+接不上不是死路：**点一张牌**，界面会写明它接不接得上、以及「和容器里的物质为什么不反应」——这是给初学者的电子手册，牌桌右侧的「手册」里还有全套规则。
 
 功能牌（注液泵 / 惰性气氛 / 可逆反应 / 检液）任何时候都能打，且不改变容器里的物质。
+
+### 角色技能
+
+选的角色决定这一手翻盘牌，**每局限用一次，只有你（人类）能用，AI 不用技能**。桌面键 `S`，按钮上带效果说明。
+
+| 角色 | 技能 | 效果 |
+|---|---|---|
+| 东风谷早苗 | 引发奇迹 | ≡ 注液泵：下家摸 2 张并跳过 |
+| 博丽灵梦 | 梦想封印 | ≡ 惰性气氛：下家跳过一回合 |
+| 鬼人正邪 | 鬼之反转 | ≡ 可逆反应：出牌方向反向 |
+| 雾雨魔理沙 | 魔炮 | 把牌堆最上面那张物质牌轰进容器，窗口里最早那种被挤出去 |
+| 十六夜咲夜 | The World | 这一回合出两张牌 |
+| 琪露诺 | 完美冻结 | 把自己冻住，下次轮到自己时跳过 |
+| 八意永琳 | 万解诊断 | 本回合标出接得住的牌——**这是全游戏唯一的高亮来源** |
+
+前三个不是三套代码：技能与那张功能牌走同一条结算路径（`GameState.applyAction`），等价关系由 `CharacterSkillTests` 里「与功能牌逐项对比」的断言锁住。「魔炮」只搬牌不造牌，牌堆总数守恒；牌堆和弃牌堆都榨不出物质牌时按钮不亮，也不会白扣一次。
 
 ### 牌池（108 张）
 
@@ -86,7 +130,7 @@ mkdir -p ~/Library/Application\ Support/ChemCards/assets/Characters/reimu
 cp 你的图.png ~/Library/Application\ Support/ChemCards/assets/Characters/reimu/base.png
 ```
 
-角色目录名：`reimu`（博丽灵梦）、`marisa`（雾雨魔理沙）、`youmu`（魂魄妖梦）、`sanae`（东风谷早苗）。牌桌背景放 `assets/Table/table_bg.png`。
+角色目录名：`sanae`（东风谷早苗）、`reimu`（博丽灵梦）、`marisa`（雾雨魔理沙）、`seiga`（鬼人正邪）、`sakuya`（十六夜咲夜）、`cirno`（琪露诺）、`eirin`（八意永琳）。牌桌背景放 `assets/Table/table_bg.png`。新角色一张 `base.png` 就能上，缺的图层会自动退化成程序化脸。
 
 ### 分层立绘（伪 Live2D）
 
@@ -99,12 +143,16 @@ base.png  hair_front.png  sleeve_l.png  sleeve_r.png
 eyes_open.png  eyes_close.png  mouth_0.png … mouth_3.png  blush.png
 ```
 
-仓库里带的 4 张是纯色背景原创立绘，用脚本一键抠底裁成正方形：
+仓库里带的立绘是**当前七个角色各一张** `base.png`（`youmu` 已下阵，图留在仓库里没有引用）。这些是纯色背景原创立绘，用脚本一键抠底裁成正方形；不带角色名就处理全部，带上就只重做指定的那几个，免得覆盖已经收下的图：
 
 ```bash
-python3 Tools/cut_portraits.py <原图目录>     # 读 <角色>*.png → Resources/Characters/<角色>/base.png
-python3 Tools/make_icon.py                    # 重画 App 图标 → build/AppIcon.icns
+python3 Tools/cut_portraits.py <原图目录>                    # 全部七个
+python3 Tools/cut_portraits.py <原图目录> seiga eirin        # 只重做这两个
+python3 Tools/make_icon.py                    # 重画 macOS App 图标 → build/AppIcon.icns
+python3 Tools/make-ios-icon.py sanae          # 换 iOS 图标 → ios/Assets.xcassets/AppIcon.appiconset/
 ```
+
+iOS 那 1024 图是提交进仓库的，编译时由 actool 编译成 `Assets.car`，平时不用重跑；只有换主角头像时才跑一次上面第三条。
 
 立绘是东方 Project 角色的**原创同人风**图片，不含任何官方素材。
 
@@ -113,9 +161,10 @@ python3 Tools/make_icon.py                    # 重画 App 图标 → build/AppI
 ```bash
 ./dist/ChemCards.app/Contents/MacOS/ChemCards --smoke-test          # 打印窗口/资源加载状态后退出
 ./dist/ChemCards.app/Contents/MacOS/ChemCards --render out.png table # 无窗口渲染 UI（menu/table/cards/banner/log/result）
+bash ios.sh smoke                                                    # 同一行状态，在 iPhone 模拟器里跑
 ```
 
-`--render` 是给没有录屏权限的环境准备的照片化自检，改布局时用它比对截图最快。
+`--render` 是给没有录屏权限的环境准备的照片化自检，改布局时用它比对截图最快。iOS 那侧 `simctl launch --stdout=` 在这版 Xcode 上不落文件，所以 `ios.sh smoke` 走的是 `--console`。
 
 ## 键盘操作
 

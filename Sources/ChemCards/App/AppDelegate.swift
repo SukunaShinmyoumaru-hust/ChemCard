@@ -29,7 +29,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { [weak self] in
                 guard let self else { return }
                 let scale = self.window.backingScaleFactor
-                print("SMOKE windows=\(NSApp.windows.count) visible=\(self.window.isVisible) key=\(self.window.isKeyWindow) main=\(NSApp.mainWindow != nil) frame=\(NSStringFromRect(self.window.frame)) scale=\(scale) policy=\(NSApp.activationPolicy().rawValue) reactions=\(ReactionTable.count) table=\(ReactionTable.describeSource)")
+                print("SMOKE windows=\(NSApp.windows.count) visible=\(self.window.isVisible) key=\(self.window.isKeyWindow) main=\(NSApp.mainWindow != nil) frame=\(NSStringFromRect(self.window.frame)) scale=\(scale) policy=\(NSApp.activationPolicy().rawValue) \(Smoke.report())")
                 NSApp.terminate(nil)
             }
         }

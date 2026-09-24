@@ -1,10 +1,11 @@
-import AppKit
 import SwiftUI
 
 enum Theme {
+    #if canImport(AppKit)
     enum AppKitColor {
         static let windowBackground = NSColor(srgbRed: 0.055, green: 0.070, blue: 0.106, alpha: 1.0)
     }
+    #endif
 
     enum Color {
         static let windowBackground = SwiftUI.Color(red: 0.055, green: 0.070, blue: 0.106)

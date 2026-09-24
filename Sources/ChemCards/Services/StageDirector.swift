@@ -1,5 +1,5 @@
-import AppKit
 import Combine
+import Foundation
 import SwiftUI
 
 /// 舞台导演：所有桌面操作都从这里进模型，再把模型事件翻译成横幅、台词、情绪和提示气泡。
@@ -66,7 +66,7 @@ final class StageDirector: ObservableObject {
          seed: UInt64 = MatchRules.defaultSeed,
          rules: MatchRules = .standard,
          pace: PlayPace = .normal,
-         reduceMotion: Bool = NSWorkspace.shared.accessibilityDisplayShouldReduceMotion) {
+         reduceMotion: Bool = Platform.systemReduceMotion) {
         self.state = GameState(players: players, seed: seed, rules: rules)
         self.pace = pace
         self.reduceMotion = reduceMotion
@@ -241,6 +241,18 @@ final class StageDirector: ObservableObject {
     }
 
     var canPassTurn: Bool { state.mustPass && state.isHumanTurn }
+
+    /// 轮到自己、这角色还有技能没用，且按得出来（魔炮手里没物质牌时不亮）
+    var canUseSkill: Bool { state.canUseSkill }
+
+    /// 发动角色技能，一局一次。播报里带上效果，玩家按之前就看得懂
+    func useSkill() {
+        guard canUseSkill, let skill = state.currentPlayer.character.skill else { return }
+        let seat = state.turn
+        state.useSkill()
+        setMood(seat, skill == .selfFreeze ? .pressed : .win)
+        say(seat, "「\(skill.displayName)」\(skill.hint)", hold: 2.6)
+    }
 
     @discardableResult
     func callReaction() -> Bool {

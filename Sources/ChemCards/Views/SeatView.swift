@@ -43,6 +43,8 @@ struct SeatView: View {
             HStack(spacing: 5) {
                 Text(player.name)
                     .font(.system(size: portraitSize * 0.16, weight: .bold, design: .rounded))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.75)
                     .foregroundStyle(Theme.Color.textPrimary)
                 if let difficulty = player.difficulty {
                     Text(difficulty.displayName.replacingOccurrences(of: " AI", with: ""))

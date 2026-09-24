@@ -95,7 +95,7 @@ final class LegalityTests: XCTestCase {
         let expected = ReactionEngine.resolve(Chemistry.species("h2so4")!, Chemistry.species("naoh")!)
         XCTAssertNotNil(expected, "H₂SO₄ + NaOH 不在表里，这条用例失去意义")
         XCTAssertEqual(state.playability(of: state.players[0].hand[0]), .reacts(expected!),
-                       "两种酸都接得住，方程式该取最新的稀硫酸")
+                       "两种酸都接得住，方程式该取最新倒进去的稀硫酸")
     }
 
     func testReactionIsTheOnlyWayOut() {

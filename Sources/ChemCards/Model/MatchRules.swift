@@ -25,5 +25,8 @@ struct MatchRules: Equatable {
     var noviceForgetCalls = 0.2
 
     static let standard = MatchRules()
+    /// 无头渲染和测试钉死在这一局，看得到确定的牌面
     static let defaultSeed: UInt64 = 0x5EED_2026_0920
+    /// 真人开局用的种子：写死的话回主菜单再开一局、重开 app 都会摸到同一手牌
+    static func freshSeed() -> UInt64 { UInt64.random(in: .min ... .max) }
 }

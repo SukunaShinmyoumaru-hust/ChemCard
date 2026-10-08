@@ -7,6 +7,7 @@ struct GameRootView: View {
     @State private var human: CharacterID = .sanae
     @State private var table: TableDifficulty = .mixed
     @State private var round = 0
+    @State private var seed = MatchRules.defaultSeed
     @State private var inGame = false
     @State private var showRules = false
 
@@ -23,10 +24,10 @@ struct GameRootView: View {
         ZStack {
             if inGame {
                 GameScreen(players: MatchSetup.seats(human: human, table: table),
-                           seed: MatchRules.defaultSeed &+ UInt64(round &* 7_919),
+                           seed: seed,
                            scene: scene,
                            onExit: { inGame = false },
-                           onRestart: { round += 1 })
+                           onRestart: { round += 1; seed = MatchRules.freshSeed() })
                     .id(round)
                     .transition(.opacity)
             } else {
@@ -149,7 +150,7 @@ struct GameRootView: View {
     }
 
     private var startButton: some View {
-        Button { inGame = true } label: {
+        Button { seed = MatchRules.freshSeed(); inGame = true } label: {
             Text("开始反应")
                 .fontWeight(.bold)
                 .buttonSized(width: SceneLayout.startButtonWidth, height: SceneLayout.buttonHeight)
